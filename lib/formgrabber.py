@@ -63,8 +63,16 @@ class formgrabber:
 
 if __name__ == '__main__':
 	import urllib.request
+	from os import getenv
+	proxy	=	getenv('http_proxy')
+	if proxy == None:
+		proxyhdl	=	urllib.request.ProxyHandler({})
+	else:
+		proxyhdl	=	urllib.request.ProxyHandler({'http',proxy})
+	opener	=	urllib.request.build_opener(proxyhdl)
+	opener.addheaders = [('User-Agent','JanHelblings formgrabber FTW!!!')]
 	print('Getting html-form from http://www.jan-helbling.ch/form.php')
-	html = (urllib.request.urlopen('http://www.jan-helbling.ch/form.php').read()).decode('utf-8','ignore')
+	html = (opener.open('http://www.jan-helbling.ch/form.php').read()).decode('utf-8','ignore')
 	f = formgrabber(html)
 	print('METHOD:',f.form_method)
 	print('ACTION:',f.form_action)
