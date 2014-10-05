@@ -46,15 +46,24 @@ class formgrabber:
 		for i in self.inputs:
 			tmp		=	{}
 			if 'name' in i.lower():
-				tmp['name'] = re.findall('(name="[a-zA-Z]+|NAME="[a-zA-Z]+)',i)[0][6:]
+				try:
+					tmp['name'] = re.findall('(name="[a-zA-Z]+|NAME="[a-zA-Z]+)',i)[0][6:]
+				except IndexError:
+					tmp['name'] = 00
 			else:
 				tmp['name'] = ''
 			if 'type' in i.lower():
-				tmp['type'] = re.findall('(type="[a-zA-Z]+|TYPE="[a-zA-Z]+)',i)[0][6:]
+				try:
+					tmp['type'] = re.findall('(type="[a-zA-Z]+|TYPE="[a-zA-Z]+)',i)[0][6:]
+				except IndexError:
+					tmp['type'] = ''
 			else:
 				tmp['type'] = ''
 			if 'value' in i.lower():
-				tmp['value'] = re.findall('(value="[a-zA-Z]+|VALUE="[a-zA-Z]+)',i)[0][7:]
+				try:
+					tmp['value'] = re.findall('(value="[a-zA-Z]+|VALUE="[a-zA-Z]+)',i)[0][7:]
+				except IndexError:
+					tmp['value'] = ''
 			else:
 				tmp['value'] = ''
 			self.input_data.append(tmp)
@@ -71,8 +80,8 @@ if __name__ == '__main__':
 		proxyhdl	=	urllib.request.ProxyHandler({'http',proxy})
 	opener	=	urllib.request.build_opener(proxyhdl)
 	opener.addheaders = [('User-Agent','JanHelblings formgrabber FTW!!!')]
-	print('Getting html-form from http://www.jan-helbling.ch/form.php')
-	html = (opener.open('http://www.jan-helbling.ch/form.php').read()).decode('utf-8','ignore')
+	print('Getting html-form from http://www.utexas.edu/learn/forms/text.html')
+	html = (opener.open('http://www.utexas.edu/learn/forms/text.html').read()).decode('utf-8','ignore')
 	f = formgrabber(html)
 	print('METHOD:',f.form_method)
 	print('ACTION:',f.form_action)
