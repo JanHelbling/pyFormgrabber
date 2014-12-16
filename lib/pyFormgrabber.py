@@ -19,7 +19,7 @@
 
 import re
 
-class formgrabber:
+class pyFormgrabber:
 	"""Usage:
 	>>> f = formgrabber(html)
 	>>> f.input_data  # list of inputs
