@@ -80,9 +80,9 @@ if __name__ == '__main__':
 		proxyhdl	=	urllib.request.ProxyHandler({'http',proxy})
 	opener	=	urllib.request.build_opener(proxyhdl)
 	opener.addheaders = [('User-Agent','JanHelblings formgrabber FTW!!!')]
-	print('Getting html-form from http://www.utexas.edu/learn/forms/text.html')
-	html = (opener.open('http://www.utexas.edu/learn/forms/text.html').read()).decode('utf-8','ignore')
-	f = formgrabber(html)
+	print('Getting html-form from http://testwebseite.bplaced.net/contact.html')
+	html = (opener.open('http://testwebseite.bplaced.net/contact.html').read()).decode('utf-8','ignore')
+	f = pyFormgrabber(html)
 	print('METHOD:',f.form_method)
 	print('ACTION:',f.form_action)
 	print('DATA:',end='')
