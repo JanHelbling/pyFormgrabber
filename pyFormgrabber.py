@@ -71,7 +71,7 @@ class pyFormgrabber:
 		
 
 if __name__ == '__main__':
-	import urllib.request
+	import urllib.request,urllib.error
 	from os import getenv
 	proxy	=	getenv('http_proxy')
 	if proxy == None:
@@ -81,7 +81,11 @@ if __name__ == '__main__':
 	opener	=	urllib.request.build_opener(proxyhdl)
 	opener.addheaders = [('User-Agent','JanHelblings formgrabber FTW!!!')]
 	print('Getting html-form from http://testwebseite.bplaced.net/contact.html')
-	html = (opener.open('http://testwebseite.bplaced.net/contact.html').read()).decode('utf-8','ignore')
+	try:
+		html = (opener.open('http://testwebseite.bplaced.net/contact.html').read()).decode('utf-8','ignore')
+	except urllib.error.URLError as e:
+		print(e.args[0])
+		exit(1)
 	f = pyFormgrabber(html)
 	print('METHOD:',f.form_method)
 	print('ACTION:',f.form_action)

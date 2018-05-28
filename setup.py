@@ -7,6 +7,6 @@ setup(name='pyFormgrabber',
 	description='Grab HTML-Forms',
 	author='Jan Helbling',
 	author_email='jan.helbling@gmail.com',
-	url='http://www.jan-helbling.ch/~jhelbling/linux.py?gpl3-opensource-library=pyFormgrabber-grab-html-forms-in-python',
+	url='https://github.com/JanHelbling/pyFormgrabber',
 	py_modules=['pyFormgrabber'],
 )
