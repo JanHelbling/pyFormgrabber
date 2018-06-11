@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 #    formgrabber.py - A Python-Class to grab html-forms
 #
-#    Copyright (C) 2014 by Jan Helbling <jan.helbling@gmail.com>
+#    Copyright (C) 2014 by Jan Helbling <jan.helbling@mailbox.org>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
