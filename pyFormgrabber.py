@@ -47,7 +47,7 @@ class pyFormgrabber:
 			tmp		=	{}
 			if 'name' in i.lower():
 				try:
-					tmp['name'] = re.findall('(name="[a-zA-Z]+|NAME="[a-zA-Z]+)',i)[0][6:]
+					tmp['name'] = re.findall('(name="[0-9a-zA-Z\-_]+|NAME="[0-9a-zA-Z_\-]+)',i)[0][6:]
 				except IndexError:
 					tmp['name'] = 00
 			else:
@@ -61,7 +61,7 @@ class pyFormgrabber:
 				tmp['type'] = ''
 			if 'value' in i.lower():
 				try:
-					tmp['value'] = re.findall('(value="[a-zA-Z]+|VALUE="[a-zA-Z]+)',i)[0][7:]
+					tmp['value'] = re.findall('(value="[0-9a-zA-Z]+|VALUE="[0-9a-zA-Z]+)',i)[0][7:]
 				except IndexError:
 					tmp['value'] = ''
 			else:
@@ -73,6 +73,10 @@ class pyFormgrabber:
 if __name__ == '__main__':
 	import urllib.request,urllib.error
 	from os import getenv
+	from sys import argv,exit
+	if argv.__len__() != 2:
+		print('Usage: {} <url-with-form>'.format(argv[0]))
+		exit(1)
 	proxy	=	getenv('http_proxy')
 	if proxy == None:
 		proxyhdl	=	urllib.request.ProxyHandler({})
@@ -80,9 +84,9 @@ if __name__ == '__main__':
 		proxyhdl	=	urllib.request.ProxyHandler({'http',proxy})
 	opener	=	urllib.request.build_opener(proxyhdl)
 	opener.addheaders = [('User-Agent','JanHelblings formgrabber FTW!!!')]
-	print('Getting html-form from http://testwebseite.bplaced.net/contact.html')
+	print('Getting html-form from {}'.format(argv[1]))
 	try:
-		html = (opener.open('http://testwebseite.bplaced.net/contact.html').read()).decode('utf-8','ignore')
+		html = (opener.open(argv[1]).read()).decode('utf-8','ignore')
 	except urllib.error.URLError as e:
 		print(e.args[0])
 		exit(1)
